@@ -7,6 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('transactions', [TransactionController::class, 'index']);
+Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
 
-Route::get('transactions/{transaction}', [TransactionController::class, 'show']);
+Route::get('transactions/{transaction}', [TransactionController::class, 'show'])->name('transaction.show');

@@ -17,6 +17,8 @@
         </div>
     </nav>
 
+        <a href="" class="class="btn btn-success">Add Transaction</a>
+
     <table class="table table-success table-striped container mt-4" >
         <thead>
             <tr>
@@ -26,6 +28,7 @@
                 <th scope="col">Category</th>
                 <th scope="col">Descrption</th>
                 <th scope="col">Date</th>
+                <th scope="col">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -37,8 +40,14 @@
                     <td>{{ $transaction['category_id'] }}</td>
                     <td>{{ $transaction['descripiton'] }}</td>
                     <td>{{ $transaction['date'] }}</td>
+                    <td class="col">
+                        <a href="transactions/{{ $transaction['id'] }}" class="btn btn-primary">View</a>
+                   
+                    </td>
+                    
                 </tr>
             @endforeach
+            
         </tbody>
     </table>
 
