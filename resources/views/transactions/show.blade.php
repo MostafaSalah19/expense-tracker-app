@@ -13,7 +13,7 @@
     <!-- As a link -->
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Transactions</a>
+            <a class="navbar-brand" href="{{ route('transactions.index') }}">Transactions</a>
         </div>
     </nav>
 
