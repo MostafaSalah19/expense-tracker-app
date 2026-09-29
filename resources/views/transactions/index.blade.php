@@ -17,7 +17,7 @@
         </div>
     </nav>
 
-        <a href="" class="class="btn btn-success">Add Transaction</a>
+        <a href="" class="btn btn-success">Add Transaction</a>
 
     <table class="table table-success table-striped container mt-4" >
         <thead>
@@ -41,7 +41,7 @@
                     <td>{{ $transaction['descripiton'] }}</td>
                     <td>{{ $transaction['date'] }}</td>
                     <td class="col">
-                        <a href="transactions/{{ $transaction['id'] }}" class="btn btn-primary">View</a>
+                        <a href="{{ route('transaction.show', ['transaction' => $transaction['id']]) }}" class="btn btn-primary">View</a>
                    
                     </td>
                     
