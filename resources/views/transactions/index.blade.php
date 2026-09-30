@@ -1,25 +1,17 @@
-<!doctype html>
-<html lang="en">
+@extends('layouts.main')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Expense Tracker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
+@section('title', 'Expense Tracker')
 
-<body style="padding: 10px" >
-    <!-- As a link -->
+@section('content')
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Transactions</a>
         </div>
     </nav>
 
-        <a href="" class="btn btn-success">Add Transaction</a>
+    <a href="" class="btn btn-success">Add Transaction</a>
 
-    <table class="table table-success table-striped container mt-4" >
+    <table class="table table-success table-striped container mt-4">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -41,19 +33,16 @@
                     <td>{{ $transaction['descripiton'] }}</td>
                     <td>{{ $transaction['date'] }}</td>
                     <td class="col">
-                        <a href="{{ route('transaction.show', ['transaction' => $transaction['id']]) }}" class="btn btn-primary">View</a>
-                   
+                        <a href="{{ route('transaction.show', ['transaction' => $transaction['id']]) }}"
+                            class="btn btn-primary">View</a>
+
+
                     </td>
-                    
+
                 </tr>
             @endforeach
-            
+
         </tbody>
     </table>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
-    </script>
-</body>
-
-</html>
+@endsection
