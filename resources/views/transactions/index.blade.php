@@ -9,7 +9,7 @@
         </div>
     </nav>
 
-    <a href="" class="btn btn-success">Add Transaction</a>
+    <a href="{{route('transaction.create')}}" class="btn btn-success">Add Transaction</a>
 
     <table class="table table-success table-striped container mt-4">
         <thead>
