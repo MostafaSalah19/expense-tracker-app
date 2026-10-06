@@ -6,7 +6,6 @@
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Transactions</a>
-            <a class="btn btn-info me-md-2" href="{{route('categories.index')}}">categories</a>
         </div>
         
     </nav>
@@ -19,9 +18,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Amount</th>
-                <th scope="col">Created By</th>
                 <th scope="col">Category</th>
-                <th scope="col">Descrption</th>
+                <th scope="col">Type</th>
                 <th scope="col">Date</th>
                 <th scope="col">actions</th>
             </tr>
@@ -29,16 +27,16 @@
         <tbody>
             @foreach ($transactions as $transaction)
                 <tr>
-                    <th scope="row">{{ $transaction['id'] }}</th>
-                    <td>{{ $transaction['amount'] }}</td>
-                    <td>{{ $transaction['user_id'] }}</td>
-                    <td>{{ $transaction['category_id'] }}</td>
-                    <td>{{ $transaction['descripiton'] }}</td>
-                    <td>{{ $transaction['date'] }}</td>
+                    <th scope="row">{{ $transaction->id }}</th>
+                    <td>{{ $transaction->amount }}</td>
+                    <td>{{ $transaction->category }}</td>
+                    <td>{{ $transaction->type }}</td>
+                    <td>{{ $transaction->date }}</td>
                     <td class="col">
                         <a href="{{ route('transaction.show', ['transaction' => $transaction['id']]) }}"
                             class="btn btn-primary">View</a>
-
+                        <a href="" class="btn btn-warning">Edit</a>
+                        <a href="" class="btn btn-danger">Delete</a>
 
                     </td>
 
