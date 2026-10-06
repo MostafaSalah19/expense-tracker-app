@@ -22,7 +22,7 @@
                 <th scope="col">Category</th>
                 <th scope="col">Type</th>
                 <th scope="col">Date</th>
-                <th scope="col">actions</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -37,7 +37,7 @@
                     <td class="col">
                         <a href="{{ route('transaction.show', ['transaction' => $transaction['id']]) }}"
                             class="btn btn-primary">View</a>
-                        <a href="" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('transaction.edit', ['transaction' => $transaction['id']]) }}" class="btn btn-warning">Edit</a>
                         <a href="" class="btn btn-danger">Delete</a>
 
                     </td>
