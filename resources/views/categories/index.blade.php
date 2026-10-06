@@ -12,7 +12,7 @@
     </nav>
 
     <div class="d-grid gap-2 col-6 mx-auto">
-        <a href="" class="btn btn-success">Add Category</a>
+        <a href="{{ route('categories.create') }}" class="btn btn-success">Add Category</a>
     </div>
     <table class="table table-success table-striped container mt-4">
         <thead>
