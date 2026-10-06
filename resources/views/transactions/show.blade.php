@@ -14,8 +14,8 @@
             Transaction Details
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{ $transaction['category_id'] }}</h5>
-            <p class="card-text">Description: {{ $transaction['descripiton'] }}</p>
+            <h5 class="card-title">{{ $transaction['category'] }}</h5>
+            <p class="card-text">Description: {{ $transaction['type'] }}</p>
             <p class="card-text">Amount: {{ $transaction['amount'] }}</p>
             <p class="card-text">Created By: {{ $transaction['user_id'] }}</p>
             <p class="card-text">Date: {{ $transaction['date'] }}</p>
