@@ -20,4 +20,10 @@ class CategoryController extends Controller
     {
         return view('categories.create');
     }
+
+    public function store()
+    {
+
+    return redirect()->route('categories.index');
+    }
 }
