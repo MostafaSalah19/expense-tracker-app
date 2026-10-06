@@ -61,11 +61,17 @@ class TransactionController extends Controller
         $transaction->category = $data['category'];
         $transaction->save();
 
-
-
         return redirect()->route('transactions.index');
     }
 
+    public function edit($transaction)
+    {
+        $users= User::all();
+
+        return view('transactions.edit', [
+            'users' => $users
+        ]);
+    }
 }
 
 
