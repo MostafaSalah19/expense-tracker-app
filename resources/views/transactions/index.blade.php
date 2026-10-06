@@ -18,6 +18,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Amount</th>
+                <th scope="col">Added By</th>
                 <th scope="col">Category</th>
                 <th scope="col">Type</th>
                 <th scope="col">Date</th>
@@ -29,6 +30,7 @@
                 <tr>
                     <th scope="row">{{ $transaction->id }}</th>
                     <td>{{ $transaction->amount }}</td>
+                    <td>{{ $transaction->user ? $transaction->user->name : 'user not found'}}</td>
                     <td>{{ $transaction->category }}</td>
                     <td>{{ $transaction->type }}</td>
                     <td>{{ $transaction->date }}</td>

@@ -12,7 +12,12 @@
         </div>
         <div class="col-md-2">
             <label for="user_id" class="form-label">Created by</label>
-            <input type="text" class="form-control" id="user_id" name="user_id">
+            <select class="form-select" name="user_id">
+                <option selected>Open this select menu</option>
+                @foreach ($users as $user)
+                    <option value="{{ $user->id }}">{{$user->name}}</option>
+                @endforeach
+            </select>
         </div>
         <div class="col-md-2">
             <label for="category" class="form-label">Category</label>
@@ -20,7 +25,7 @@
         </div>
         <div class="col-md-2">
             <label for="type" class="form-label">type</label>
-            <select id="type" class="form-select">
+            <select id="type" class="form-select" name="tyoe">
                 <option selected>Open this select menu</option>
                 <option value="1">income</option>
                 <option value="2">expense</option>
