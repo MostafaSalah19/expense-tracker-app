@@ -12,13 +12,13 @@
     <div class="card">
         <div class="card-header">
             Transaction Details
-        </div>
+        </div> 
         <div class="card-body">
-            <h5 class="card-title">{{ $transaction['category'] }}</h5>
-            <p class="card-text">Description: {{ $transaction['type'] }}</p>
-            <p class="card-text">Amount: {{ $transaction['amount'] }}</p>
-            <p class="card-text">Created By: {{ $transaction['user_id'] }}</p>
-            <p class="card-text">Date: {{ $transaction['date'] }}</p>
+            <h5 class="card-title">{{ $transaction->category }}</h5>
+            <p class="card-text">type: {{ $transaction->type }}</p>
+            <p class="card-text">Amount: {{ $transaction->amount }}</p>
+            <p class="card-text">Created By: {{ $transaction->user->name }}</p>
+            <p class="card-text">Date: {{ $transaction->date }}</p>
         </div>
     </div>
 

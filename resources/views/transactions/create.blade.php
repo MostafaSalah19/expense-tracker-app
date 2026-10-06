@@ -4,7 +4,7 @@
 @section('title', 'Add Transaction')
 
 @section('content')
-    <form class="row g-5" style="padding: 10px" method="Post" action="{{ route('transaction.store') }}">
+    <form class="row g-5" style="padding: 10px" method="Post" action="{{ route('transactions.store') }}">
         @csrf
         <div class="col-md-2">
             <label for="amount" class="form-label">Amount</label>

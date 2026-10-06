@@ -3,8 +3,9 @@
 @section('title', 'Edit Transaction')
 
 @section('content')
-    <form class="row g-5" style="padding: 10px">
+    <form class="row g-5" style="padding: 10px" method="POST" action="{{route('transactions.update', $transaction->id)}}">
         @csrf
+        @method('PUT')
         <div class="col-md-2">
             <label for="amount" class="form-label">Amount</label>
             <input type="integer" class="form-control" id="amount" name="amount">
@@ -31,7 +32,7 @@
             </select>
         </div>
         <div class="col-12">
-            <button type="submit" class="btn btn-primary">Edit</button>
+            <button type="submit" class="btn btn-primary">Update</button>
         </div>
     </form>
 @endsection

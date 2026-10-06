@@ -11,7 +11,7 @@
     </nav>
 
     <div class="d-grid gap-2 col-6 mx-auto">
-        <a href="{{ route('transaction.create') }}" class="btn btn-success">Add Transaction</a>
+        <a href="{{ route('transactions.create') }}" class="btn btn-success">Add Transaction</a>
     </div>
     <table class="table table-success table-striped container mt-4">
         <thead>
@@ -35,9 +35,9 @@
                     <td>{{ $transaction->type }}</td>
                     <td>{{ $transaction->date }}</td>
                     <td class="col">
-                        <a href="{{ route('transaction.show', ['transaction' => $transaction['id']]) }}"
+                        <a href="{{ route('transactions.show', ['transaction' => $transaction['id']]) }}"
                             class="btn btn-primary">View</a>
-                        <a href="{{ route('transaction.edit', ['transaction' => $transaction['id']]) }}" class="btn btn-warning">Edit</a>
+                        <a href="{{ route('transactions.edit', ['transaction' => $transaction['id']]) }}" class="btn btn-warning">Edit</a>
                         <a href="" class="btn btn-danger">Delete</a>
 
                     </td>
