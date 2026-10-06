@@ -19,10 +19,9 @@ class TransactionController extends Controller
 
     }
 
-    public function show($transaction)
+    public function show(Transaction $transaction)
     {
 
-        $transaction = Transaction::find($transaction);
 
         return view('transactions.show', [
             'transaction' => $transaction
@@ -40,9 +39,9 @@ class TransactionController extends Controller
 
     public function store(Request $myRequestObject)
     {
-        $data = $myRequestObject->all();
+        // $data = $myRequestObject->all();
 
-        // $data = request()->all();
+        $data = request()->all();
 
         // Transaction::create([
         //     'amount' => $data['amount'],
@@ -64,13 +63,31 @@ class TransactionController extends Controller
         return redirect()->route('transactions.index');
     }
 
-    public function edit($transaction)
+    public function edit(Transaction $transaction)
     {
         $users= User::all();
 
         return view('transactions.edit', [
-            'users' => $users
+            'users' => $users,
+            'transaction' => $transaction
         ]);
+    }
+
+    public function update($transactionId)
+    {
+        $amount = request()->amount;
+        $userId = request()->user_id;
+        $category = request()->category;
+        // dd($amount, $userId, $category);
+
+        $singleTransactionFromDB = Transaction::findOrFail($transactionId);
+        $singleTransactionFromDB->update([
+            'amount' => $amount,
+            'user_id' => $userId,
+            'category' => $category,
+        ]);
+
+        return redirect()->route('transactions.show', $transactionId);
     }
 }
 
