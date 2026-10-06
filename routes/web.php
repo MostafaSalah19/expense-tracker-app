@@ -8,7 +8,8 @@ Route::get('/', function () {
 });
 
 Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
-Route::get('transactions/create', [TransactionController::class, 'create'])->name('transaction.create');
-Route::post('transactions', [TransactionController::class, 'store'])->name('transaction.store');
-Route::get('transactions/{transaction}', [TransactionController::class, 'show'])->name('transaction.show');
-Route::get('transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transaction.edit');
+Route::get('transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
+Route::post('transactions', [TransactionController::class, 'store'])->name('transactions.store');
+Route::get('transactions/{transaction}', [TransactionController::class, 'show'])->name('transactions.show');
+Route::get('transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transactions.edit');
+Route::put('transactions/{transaction}', [TransactionController::class, 'update'])->name('transactions.update');
