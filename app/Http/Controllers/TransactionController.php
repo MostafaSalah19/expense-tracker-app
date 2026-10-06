@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
@@ -20,7 +21,7 @@ class TransactionController extends Controller
     public function show($transaction)
     {
 
-        $transaction = ['id' => 1, 'amount' => '25000', 'user_id' => 'mostafa', 'category_id' => 'home', 'descripiton' => 'asfczxca', "date" => '3/2/2026'];
+        $transaction = Transaction::find($transaction);
 
         return view('transactions.show', [
             'transaction' => $transaction
@@ -33,10 +34,32 @@ class TransactionController extends Controller
         return view('transactions.create');
     }
 
-    public function store()
+    public function store(Request $myRequestObject)
     {
+        $data = $myRequestObject->all();
 
-    return redirect()->route('transactions.index');
+        // $data = request()->all();
+
+        // Transaction::create([
+        //     'amount' => $data['amount'],
+        //     'user_id' => $data['user'],
+        //     'category_id' => $data['category'],
+        //     'description' => $data['description'],
+        // ]);
+
+        // Transaction::create($myRequestObject->all());
+
+        // Transaction::create($data);
+
+        $transaction = new Transaction;
+        $transaction->amount = $data['amount'];
+        $transaction->user_id = $data['user_id'];
+        $transaction->category = $data['category'];
+        $transaction->save();
+
+
+
+        return redirect()->route('transactions.index');
     }
 
 }
