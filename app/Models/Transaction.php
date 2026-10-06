@@ -12,4 +12,12 @@ class Transaction extends Model
         'category',
         'description'
     ];
+
+    // public function myUserRelation(){
+    //     return $this -> belongsTo(User::class, 'user_id');
+    // }
+
+    public function user(){
+        return $this -> belongsTo(User::class);
+    }
 }
