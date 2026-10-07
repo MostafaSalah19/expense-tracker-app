@@ -8,27 +8,27 @@
         @csrf
         <div class="col-md-2">
             <label for="amount" class="form-label">Amount</label>
-            <input type="integer" class="form-control" id="amount" name="amount">
+            <input type="integer" class="form-control"  name="Amount">
         </div>
         <div class="col-md-2">
             <label for="user_id" class="form-label">Created by</label>
-            <select class="form-select" name="user_id">
-                <option selected>Open this select menu</option>
+            <select class="form-select" name="Creator">
+                <option></option>
                 @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{$user->name}}</option>
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
             </select>
         </div>
         <div class="col-md-2">
             <label for="category" class="form-label">Category</label>
-            <input type="text" class="form-control" id="category" name="category">
+            <input type="text" class="form-control" name="Category">
         </div>
         <div class="col-md-2">
             <label for="type" class="form-label">type</label>
-            <select id="type" class="form-select" name="tyoe">
-                <option selected>Open this select menu</option>
-                <option value="1">income</option>
-                <option value="2">expense</option>
+            <select id="type" class="form-select" name="Type">
+                <option ></option>
+                <option value="income">income</option>
+                <option value="expense">expense</option>
             </select>
         </div>
         <div class="col-12">
