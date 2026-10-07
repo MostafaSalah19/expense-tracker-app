@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\StoreTransactionRequest;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,11 +38,23 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function store(Request $myRequestObject)
+    public function store(StoreTransactionRequest $myRequestObject)
     {
-        // $data = $myRequestObject->all();
+        //1- get the user data
+        
+        $data = $myRequestObject->all();
+        // $data = request()->all();
 
-        $data = request()->all();
+        // validate the data
+    
+        // $data =  $myRequestObject->validate([
+        //     'Creator'  => ['required', 'exists:users,id'],
+        //     'Amount'   => ['required', 'integer', 'min:1'],
+        //     'Category' => ['required', 'string', 'max:255'],
+        //     'Type'     => ['required', 'in:income,expense'],
+        //  ]);
+
+        //2- store the submitted data in database
 
         // Transaction::create([
         //     'amount' => $data['amount'],
@@ -52,13 +65,13 @@ class TransactionController extends Controller
 
         // Transaction::create($myRequestObject->all());
 
-        // Transaction::create($data);
+        Transaction::create($data);
 
-        $transaction = new Transaction;
-        $transaction->amount = $data['amount'];
-        $transaction->user_id = $data['user_id'];
-        $transaction->category = $data['category'];
-        $transaction->save();
+        // $transaction = new Transaction;
+        // $transaction->amount = $data['amount'];
+        // $transaction->user_id = $data['user_id'];
+        // $transaction->category = $data['category'];
+        // $transaction->save();
 
         return redirect()->route('transactions.index');
     }
