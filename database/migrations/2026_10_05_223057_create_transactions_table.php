@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id()->autoIncrement()->unique();
             $table->integer('amount');
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->text('description')->nullable();
+            $table->text('category');
+            $table->text('type')->nullable();
             $table->date('date')->useCurrent();
             $table->timestamps();
         });
