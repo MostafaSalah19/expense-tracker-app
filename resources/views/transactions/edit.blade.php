@@ -1,38 +1,43 @@
-@extends('layouts.main')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Edit Transaction') }}
+        </h2>
+    </x-slot>
+    <x-guest-layout>
+        <form method="POST" action="{{ route('transactions.update', $transaction->id) }}">
+            @csrf
+            @method('PUT')
 
-@section('title', 'Edit Transaction')
+            <!-- Amount -->
+            <div>
+                <label for="amount" class="form-label">Amount</label>
+                <input type="integer" class="block mt-1 w-full" name="amount" value="{{ $transaction->amount }}">
+            </div>
 
-@section('content')
-    <form class="row g-5" style="padding: 10px" method="POST" action="{{route('transactions.update', $transaction->id)}}">
-        @csrf
-        @method('PUT')
-        <div class="col-md-2">
-            <label for="amount" class="form-label">Amount</label>
-            <input type="integer" class="form-control"  name="amount" value="{{ $transaction->amount }}">
-        </div>
-        <div class="col-md-2">
-            <label for="user_id" class="form-label">Created by</label>
-            <select class="form-select" name="user_id">
-                <option selected>Open this select menu</option>
-                @foreach ($users as $user)
-                    <option value="{{ $user->id }}">{{$user->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-md-2">
-            <label for="category" class="form-label">Category</label>
-            <input type="text" class="form-control"  name="category" value="{{ $transaction->category }}">
-        </div>
-        <div class="col-md-2">
-            <label for="type" class="form-label">type</label>
-            <select class="form-select" name="type" >
-                <option selected>Open this select menu</option>
-                <option value="1">income</option>
-                <option value="2">expense</option>
-            </select>
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-primary">Update</button>
-        </div>
-    </form>
-@endsection
+            <!-- Category -->
+            <div class="mt-4">
+                <label for="category" class="form-label">Category</label>
+                <input type="text" class="block mt-1 w-full" name="category" value="{{ $transaction->category }}">
+            </div>
+
+            <!-- Type -->
+            <div class="mt-4">
+                <label for="type" class="form-label">type</label>
+                <select id="type" class="block mt-1 w-full" name="type" value="{{ $transaction->type }}">
+                    <option value="income">income</option>
+                    <option value="expense">expense</option>
+                </select>
+
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                
+
+                <x-primary-button class="ms-4">
+                    {{ __('Confirm') }}
+                </x-primary-button>
+            </div>
+        </form>
+    </x-guest-layout>
+</x-app-layout>
