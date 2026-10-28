@@ -14,7 +14,7 @@ Route::get('/user', function (Request $request) {
 
 Route::get('transactions', [TransactionController::class, "index"])->middleware('auth:sanctum');
 Route::get('transactions/{transaction}', [TransactionController::class, "show"]);
-
+Route::post('transactions', [TransactionController::class, 'store']);
 
 Route::post('/sanctum/token', function (Request $request) {
     $request->validate([
