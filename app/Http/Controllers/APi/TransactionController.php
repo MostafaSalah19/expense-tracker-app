@@ -27,13 +27,14 @@ class TransactionController extends Controller
 
         $data = $request -> all();
 
-        Transaction::create([
+        $transactions = Transaction::create([
             'amount' => $data['amount'],
             'user_id' => $data['creator'],
             'category' => $data['category'],
             'type' => $data['type'],
         ]);
 
-        
+        return new TransactionResource($transactions);
+
     }
 }
