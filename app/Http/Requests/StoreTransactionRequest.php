@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\ValidationRule;
+// use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTransactionRequest extends FormRequest
@@ -23,21 +23,21 @@ class StoreTransactionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
-            'amount'   => ['required', 'integer', 'min:1'],
-            'creator'  => ['required', 'exists:users,id'],
+
+            'amount' => ['required', 'decimal:0,2', 'min:0.01', 'max:9999999999.99'],
             'category' => ['required', 'string', 'max:255'],
-            'type'     => ['required', 'in:income,expense']
+            'type' => ['required', 'in:income,expense'],
         ];
     }
 
     public function messages(): array
     {
         return [
-            'Creator.required' => 'A Creator is required',
-            'Amount.required' => 'A Amount is required',
-            'Category.required' => 'A Category is required',
-            'Type.required' => 'A Type is required',
+            'amount.required' => 'An amount is required.',
+            'amount.decimal' => 'The amount can have at most 2 decimal places.',
+            'category.required' => 'A category is required.',
+            'type.required' => 'A type is required.',
+            'type.in' => 'The type must be income or expense.',
         ];
     }
 }
