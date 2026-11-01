@@ -19,11 +19,10 @@ class TransactionFactory extends Factory
     public function definition(): array
     {
         return [
-            'amount' => $this->faker->numberBetween(10, 5000),
+            'amount' => fake()->numberBetween(10, 5000),
             'user_id' => User::factory(),
-            'date' => $this->faker->date(),
-            'category' => $this->faker->sentence(),
-            'type' => $this->faker->randomElement(['income', 'expense'])
+            'category' => fake()->randomElement(['Food', 'Transport', 'Salary', 'Rent', 'Shopping']),
+            'type' => fake()->randomElement(['income', 'expense']),
         ];
     }
 }
