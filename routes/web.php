@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransactionController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -17,15 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('transactions', TransactionController::class);
 });
 
-
 require __DIR__.'/auth.php';
-
-Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index')->middleware('auth');
-Route::get('transactions/create', [TransactionController::class, 'create'])->name('transactions.create')->middleware('auth');
-Route::post('transactions', [TransactionController::class, 'store'])->name('transactions.store')->middleware('auth');
-Route::get('transactions/{transaction}', [TransactionController::class, 'show'])->name('transactions.show')->middleware('auth');
-Route::get('transactions/{transaction}/edit', [TransactionController::class, 'edit'])->name('transactions.edit')->middleware('auth');
-Route::put('transactions/{transaction}', [TransactionController::class, 'update'])->name('transactions.update')->middleware('auth');
-Route::delete('transactions/{transaction}', [TransactionController::class, 'destroy'])->name('transactions.destroy')->middleware('auth');
