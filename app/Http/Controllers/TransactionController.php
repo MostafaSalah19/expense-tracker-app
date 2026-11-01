@@ -1,118 +1,73 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
-
 use App\Models\Transaction;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class TransactionController extends Controller
 {
-    //
-
-    public function index()
+    public function index(Request $request): View
     {
-        $transactions = Transaction::paginate(10);
+        $transactions = $request->user()
+            ->transactions()
+            ->with('user')
+            ->latest('date')
+            ->latest('id')
+            ->paginate(10);
 
         return view('transactions.index', [
-            'transactions' => $transactions
+            'transactions' => $transactions,
         ]);
-
     }
 
-    public function show(Transaction $transaction)
+    public function show(Request $request, Transaction $transaction): View
     {
 
+        $transaction = $request->user()->transactions()->findOrFail($transaction);
 
         return view('transactions.show', [
-            'transaction' => $transaction
-        ]);
-
-    }
-
-    public function create()
-    {
-        $users = User::all();
-        return view('transactions.create', [
-            'users' => $users
+            'transaction' => $transaction,
         ]);
     }
 
-    public function store(StoreTransactionRequest $myRequestObject)
+    public function create(): View
     {
-        //1- get the user data
-        
-        $data = $myRequestObject->all();
-        // $data = request()->all();
+        return view('transactions.create');
+    }
 
-        // validate the data
-    
-        // $data =  $myRequestObject->validate([
-        //     'Creator'  => ['required', 'exists:users,id'],
-        //     'Amount'   => ['required', 'integer', 'min:1'],
-        //     'Category' => ['required', 'string', 'max:255'],
-        //     'Type'     => ['required', 'in:income,expense'],
-        //  ]);
-
-        //2- store the submitted data in database
-
-        // Transaction::create([
-        //     'amount' => $data['amount'],
-        //     'user_id' => $data['user'],
-        //     'category_id' => $data['category'],
-        //     'description' => $data['description'],
-        // ]);
-
-        // Transaction::create($myRequestObject->all());
-
-        // Transaction::create($data);
-
-        $transaction = new Transaction;
-        $transaction->amount = $data['amount'];
-        $transaction->user_id = $data['creator'];
-        $transaction->category = $data['category'];
-        $transaction->type = $data['type'];
-        $transaction->save();
+    public function store(StoreTransactionRequest $request)
+    {
+        $request->user()->transactions()->create($request->validated());
 
         return redirect()->route('transactions.index');
     }
 
-    public function edit(Transaction $transaction)
+    public function edit(Request $request, Transaction $transaction): View
     {
-        $users= User::all();
+        $transaction = $request->user()->transactions()->findOrFail($transaction);
 
         return view('transactions.edit', [
-            'users' => $users,
-            'transaction' => $transaction
+            'transaction' => $transaction,
         ]);
     }
 
-    public function update(UpdateTransactionRequest $request, int $transactionId)
+    public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
-        $amount = request()->amount;
-        $category = request()->category;
-        $type = request()->type;
-        // dd($amount, $userId, $category);
 
-        $singleTransactionFromDB = Transaction::findOrFail($transactionId);
-        $singleTransactionFromDB->update([
-            'amount' => $amount,
-            'category' => $category,
-            'type' => $type,
-        ]);
+        $transaction = $request->user()->transactions()->findOrFail($transaction);
 
-        return redirect()->route('transactions.show', $transactionId);
+        $transaction->update($request->validated());
+
+        return redirect()->route('transactions.show', $transaction);
     }
 
-
-    public function destroy(int $transactionId)
+    public function destroy(Request $request, Transaction $transaction)
     {
-        // $transaction = Transaction::find($transactionId);
-        // $transaction->delete();
-
-        Transaction::where('id', $transactionId)->delete();
+        $request->user()->transactions()->findOrFail($transaction)->delete();
 
         return redirect()->route('transactions.index');
     }

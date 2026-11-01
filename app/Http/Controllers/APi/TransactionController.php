@@ -1,40 +1,65 @@
 <?php
 
-namespace App\Http\Controllers\APi;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transaction;
 use App\Http\Requests\StoreTransactionRequest;
+use App\Http\Requests\UpdateTransactionRequest;
 use App\Http\Resources\TransactionResource;
-
+use App\Models\Transaction;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class TransactionController extends Controller
 {
-    public function index(){
+    public function index(Request $request): AnonymousResourceCollection
+    {
+        $transactions = $request->user()
+            ->transactions()
+            ->with('user')
+            ->latest('date')
+            ->latest('id')
+            ->paginate(15);
 
-    $transactions = Transaction::all();
-
-    return TransactionResource::collection($transactions);
+        return TransactionResource::collection($transactions);
     }
 
-    public function show(int $id){
-        $transactions = Transaction::find($id);
+    public function show(Request $request, Transaction $transaction): TransactionResource
+    {
 
-        return new TransactionResource($transactions);
+        $transaction = $request->user()->transactions()->findOrFail($transaction);
+
+        return new TransactionResource($transaction);
     }
 
-    public function store(StoreTransactionRequest  $request){
+    public function store(StoreTransactionRequest $request): JsonResponse
+    {
+        $transaction = $request->user()
+            ->transactions()
+            ->create($request->validated());
 
-        $data = $request -> all();
+        return (new TransactionResource($transaction->refresh()))
+            ->response()
+            ->setStatusCode(201);
+    }
 
-        $transactions = Transaction::create([
-            'amount' => $data['amount'],
-            'user_id' => $data['creator'],
-            'category' => $data['category'],
-            'type' => $data['type'],
-        ]);
+    public function update(UpdateTransactionRequest $request, Transaction $transaction): TransactionResource
+    {
+        $transaction = $request->user()->transactions()->findOrFail($transaction);
 
-        return new TransactionResource($transactions);
+        $transaction->update($request->validated());
 
+        return new TransactionResource($transaction);
+    }
+
+    public function destroy(Request $request, Transaction $transaction): Response
+    {
+        $transaction = $request->user()->transactions()->findOrFail($transaction);
+
+        $transaction->delete();
+
+        return response()->noContent();
     }
 }
