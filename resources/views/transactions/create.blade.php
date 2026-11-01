@@ -11,18 +11,7 @@
             <!-- Amount -->
             <div>
                 <label for="amount" class="form-label">Amount</label>
-                <input class="block mt-1 w-full" type="integer" name="amount">
-            </div>
-
-            <!-- Creator -->
-            <div class="mt-4">
-                <label for="user_id" class="form-label">Created by</label>
-                <select class="block mt-1 w-full" name="creator">
-                    <option></option>
-                    @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
+                <input class="block mt-1 w-full" type="float" name="amount">
             </div>
 
             <!-- Category -->
@@ -43,7 +32,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                
+
 
                 <x-primary-button class="ms-4">
                     {{ __('Confirm') }}
