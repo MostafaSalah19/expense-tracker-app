@@ -11,16 +11,16 @@ class Transaction extends Model
 
     protected $fillable = [
         'amount',
-        'user_id',
         'category',
-        'type'
+        'type',
     ];
 
     // public function myUserRelation(){
     //     return $this -> belongsTo(User::class, 'user_id');
     // }
 
-    public function user(){
-        return $this -> belongsTo(User::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
