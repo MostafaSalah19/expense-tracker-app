@@ -4,40 +4,53 @@
             {{ __('Add Transactions') }}
         </h2>
     </x-slot>
-    <x-guest-layout>
-        <form method="POST" action="{{ route('transactions.store') }}">
-            @csrf
+    <div class="py-12">
+        <div class="max-w-md mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg p-6">
+                <form method="POST" action="{{ route('transactions.store') }}">
+                    @csrf
 
-            <!-- Amount -->
-            <div>
-                <label for="amount" class="form-label">Amount</label>
-                <input class="block mt-1 w-full" type="float" name="amount">
+                    <!-- Amount -->
+                    <div>
+                        <x-input-label for="amount" :value="__('Amount')" />
+                        <x-text-input id="amount" name="amount" type="number" min="0.01" step="0.01"
+                            class="block mt-1 w-full" required autofocus />
+                    </div>
+
+                    <!-- Category -->
+                    <div>
+                        <x-input-label for="category" :value="__('Category')" />
+                        <x-text-input id="category" name="category" type="text" class="block mt-1 w-full"
+                            required />
+                    </div>
+
+                    <!-- Type -->
+                    <div>
+                        <x-input-label for="type" :value="__('Type')" />
+                        <select id="type" name="type" required
+                            class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                            <option value="" disabled @selected(!old('type'))>{{ __('Choose a type') }}
+                            </option>
+                            <option value="income" @selected(old('type') === 'income')>{{ __('Income') }}</option>
+                            <option value="expense" @selected(old('type') === 'expense')>{{ __('Expense') }}</option>
+                        </select>
+
+                    </div>
+
+                    <div class="flex items-center justify-end mt-4">
+                        <a href="{{ route('transactions.index') }}"
+                            class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 underline">
+                            {{ __('Cancel') }}
+                        </a>
+
+
+                        <x-primary-button class="ms-4">
+                            {{ __('Add Transaction') }}
+                        </x-primary-button>
+                    </div>
+                </form>
             </div>
+        </div>
+    </div>
 
-            <!-- Category -->
-            <div class="mt-4">
-                <label for="category" class="form-label">Category</label>
-                <input type="text" class="block mt-1 w-full" name="category">
-            </div>
-
-            <!-- Type -->
-            <div class="mt-4">
-                <label for="type" class="form-label">type</label>
-                <select id="type" class="block mt-1 w-full" name="type">
-                    <option></option>
-                    <option value="income">income</option>
-                    <option value="expense">expense</option>
-                </select>
-
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-
-
-                <x-primary-button class="ms-4">
-                    {{ __('Confirm') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </x-guest-layout>
 </x-app-layout>
