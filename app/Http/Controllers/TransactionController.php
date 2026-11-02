@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
-use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -24,10 +23,10 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function show(Request $request, Transaction $transaction): View
+    public function show(Request $request, int $id): View
     {
 
-        $transaction = $request->user()->transactions()->findOrFail($transaction);
+        $transaction = $request->user()->transactions()->findOrFail($id);
 
         return view('transactions.show', [
             'transaction' => $transaction,
@@ -46,28 +45,29 @@ class TransactionController extends Controller
         return redirect()->route('transactions.index');
     }
 
-    public function edit(Request $request, Transaction $transaction): View
+    public function edit(Request $request, int $id): View
     {
-        $transaction = $request->user()->transactions()->findOrFail($transaction);
+
+        $transaction = $request->user()->transactions()->findOrFail($id);
 
         return view('transactions.edit', [
             'transaction' => $transaction,
         ]);
     }
 
-    public function update(UpdateTransactionRequest $request, Transaction $transaction)
+    public function update(UpdateTransactionRequest $request, int $id)
     {
 
-        $transaction = $request->user()->transactions()->findOrFail($transaction);
+        $transaction = $request->user()->transactions()->findOrFail($id);
 
         $transaction->update($request->validated());
 
         return redirect()->route('transactions.show', $transaction);
     }
 
-    public function destroy(Request $request, Transaction $transaction)
+    public function destroy(Request $request, int $id)
     {
-        $request->user()->transactions()->findOrFail($transaction)->delete();
+        $request->user()->transactions()->findOrFail($id)->delete();
 
         return redirect()->route('transactions.index');
     }
