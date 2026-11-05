@@ -42,7 +42,7 @@ A small Laravel application for tracking personal income and expenses. Every use
 
 ## Tech stack
 
-- PHP 8.3+, Laravel 13
+- PHP 8.5.11, Laravel 13
 - MySQL
 - Blade, Tailwind CSS, Alpine.js, Vite (via Laravel Breeze)
 - Laravel Sanctum (API tokens)
@@ -50,7 +50,7 @@ A small Laravel application for tracking personal income and expenses. Every use
 
 ## Requirements
 
-- PHP 8.3 or newer and Composer
+- PHP 8.5.11 or newer and Composer
 - Node.js and npm
 - MySQL (create an empty database first)
 
