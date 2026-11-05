@@ -46,7 +46,7 @@
                                                 {{ ucfirst($transaction->type) }}
                                             </span></td>
                                         <td class="px-6 py-4 whitespace-nowrap dark:text-black">
-                                            {{ $transaction->date }}</td>
+                                            {{ $transaction->date?->toDateString() }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap space-x-3 ">
                                             <a href="{{ route('transactions.show', ['transaction' => $transaction['id']]) }}"
                                                 class="text-blue-800 dark:text-blue-600 hover:underline">View</a>

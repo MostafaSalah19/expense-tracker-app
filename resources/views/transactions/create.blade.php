@@ -34,7 +34,12 @@
                             <option value="income" @selected(old('type') === 'income')>{{ __('Income') }}</option>
                             <option value="expense" @selected(old('type') === 'expense')>{{ __('Expense') }}</option>
                         </select>
+                    </div>
 
+                    {{-- date --}}
+                    <div>
+                        <x-input-label for="Date" :value="__('Date')" />
+                        <x-text-input id="date" name="date" type="date" class="block mt-1 w-full" required />
                     </div>
 
                     <div class="flex items-center justify-end mt-4">

@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 // use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTransactionRequest extends FormRequest
@@ -16,6 +15,13 @@ class StoreTransactionRequest extends FormRequest
         return true;
     }
 
+
+    protected function prepareForValidation(): void
+    {
+        if(blank($this->input('date'))) {
+            $this->merge(['date'=>today()->toDateString()]);
+        }
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,6 +34,7 @@ class StoreTransactionRequest extends FormRequest
             'amount' => ['required', 'decimal:0,2', 'min:0.01', 'max:9999999999.99'],
             'category' => ['required', 'string', 'max:255'],
             'type' => ['required', 'in:income,expense'],
+            'date'     => ['required', 'date_format:Y-m-d'],
         ];
     }
 

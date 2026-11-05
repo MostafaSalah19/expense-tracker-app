@@ -23,6 +23,7 @@ class TransactionFactory extends Factory
             'user_id' => User::factory(),
             'category' => fake()->randomElement(['Food', 'Transport', 'Salary', 'Rent', 'Shopping']),
             'type' => fake()->randomElement(['income', 'expense']),
+            'date' => fake()->dateTimeBetween('-1 year')->format('Y-m-d'),
         ];
     }
 }

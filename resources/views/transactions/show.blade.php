@@ -34,7 +34,7 @@
                     </div>
                     <div class="flex justify-between">
                         <dt class="text-gray-500 dark:text-gray-400">{{ __('Date') }}</dt>
-                        <dd>{{ $transaction->date }}</dd>
+                        <dd>{{ $transaction->date?->toDateString() }}</dd>
                     </div>
                 </dl>
                 <div class="mt-6 flex items-center justify-between">
